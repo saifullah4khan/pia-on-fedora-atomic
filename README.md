@@ -61,7 +61,7 @@ Bazzite recommends package layering only for system-level software that cannot w
 This is the recommended method because you can read every command before running it.
 
 ```bash
-git clone https://github.com/YOUR_GITHUB_USERNAME/pia-on-fedora-atomic.git
+git clone https://github.com/saifullah4khan/pia-on-fedora-atomic.git
 cd pia-on-fedora-atomic
 chmod +x install.sh install-stage1.sh install-stage2.sh uninstall.sh
 ./install.sh
@@ -104,12 +104,10 @@ Run Stage 2:
 
 ## Option C: Paste-in installer
 
-Replace `YOUR_GITHUB_USERNAME` after publishing the repository.
-
 Reviewing a downloaded script before executing it is safer than piping it directly into Bash. For convenience, the standalone installer also supports this two-command process:
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/pia-on-fedora-atomic/main/install.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/saifullah4khan/pia-on-fedora-atomic/main/install.sh)
 ```
 
 Reboot when Stage 1 finishes:
@@ -121,7 +119,7 @@ systemctl reboot
 Then run the exact same command again:
 
 ```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/pia-on-fedora-atomic/main/install.sh)
+bash <(curl -fsSL https://raw.githubusercontent.com/saifullah4khan/pia-on-fedora-atomic/main/install.sh)
 ```
 
 # Fully manual installation
