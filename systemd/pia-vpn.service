@@ -1,0 +1,14 @@
+[Unit]
+Description=Private Internet Access VPN daemon
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+ExecStart=/var/opt/piavpn/bin/pia-daemon
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

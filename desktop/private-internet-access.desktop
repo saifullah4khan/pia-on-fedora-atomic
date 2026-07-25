@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Private Internet Access
+Comment=Connect to the Private Internet Access VPN
+Exec=/var/opt/piavpn/bin/pia-client
+TryExec=/var/opt/piavpn/bin/pia-client
+Icon=network-vpn
+Terminal=false
+Categories=Network;Security;
+StartupNotify=true
