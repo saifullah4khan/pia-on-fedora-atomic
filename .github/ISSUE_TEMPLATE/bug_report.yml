@@ -1,0 +1,75 @@
+name: Bug report
+description: Something in these scripts did not work
+title: "[bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Bugs in the PIA client itself belong at
+        https://github.com/pia-foss/desktop/issues. This form is for the
+        installer, uninstaller, and documentation in this repository.
+
+        Never include PIA credentials, account numbers, VPN tokens, or full logs
+        containing private network data.
+
+  - type: input
+    id: version
+    attributes:
+      label: Project version
+      description: Output of ./install.sh --version
+      placeholder: pia-on-fedora-atomic 1.1.0
+    validations:
+      required: true
+
+  - type: input
+    id: distro
+    attributes:
+      label: Distribution and desktop environment
+      placeholder: Bazzite KDE
+    validations:
+      required: true
+
+  - type: dropdown
+    id: stage
+    attributes:
+      label: Where it failed
+      options:
+        - Stage 1, layering packages
+        - Stage 2, downloading the installer
+        - Stage 2, running PIA's installer
+        - Stage 2, creating the service or launcher
+        - Uninstall
+        - Documentation is wrong or unclear
+        - Somewhere else
+    validations:
+      required: true
+
+  - type: textarea
+    id: command
+    attributes:
+      label: The command you ran
+      render: shell
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected, and what happened instead
+    validations:
+      required: true
+
+  - type: textarea
+    id: output
+    attributes:
+      label: Terminal output
+      description: Sanitized. Remove usernames, tokens, and private network details.
+      render: text
+
+  - type: textarea
+    id: verify
+    attributes:
+      label: Output of ./install.sh --verify
+      description: Makes no changes and needs no sudo.
+      render: text

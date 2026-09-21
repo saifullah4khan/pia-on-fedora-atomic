@@ -1,0 +1,68 @@
+name: lint
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  shell:
+    name: Shell scripts
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Syntax check
+        run: |
+          for script in install.sh install-stage1.sh install-stage2.sh uninstall.sh; do
+            echo "bash -n $script"
+            bash -n "$script"
+          done
+
+      - name: ShellCheck
+        run: shellcheck -S style install.sh install-stage1.sh install-stage2.sh uninstall.sh
+
+      - name: Help and version run without a PIA install
+        run: |
+          chmod +x install.sh install-stage1.sh install-stage2.sh uninstall.sh
+          NO_COLOR=1 ./install.sh --help
+          NO_COLOR=1 ./install.sh --version
+          NO_COLOR=1 ./uninstall.sh --help
+          NO_COLOR=1 ./uninstall.sh --version
+
+      - name: Unknown options are rejected
+        run: |
+          if NO_COLOR=1 ./install.sh --not-a-real-flag >/dev/null 2>&1; then
+            echo "install.sh accepted an unknown option"
+            exit 1
+          fi
+
+  assets:
+    name: Desktop entry and version
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install desktop-file-utils
+        run: sudo apt-get update && sudo apt-get install -y desktop-file-utils
+
+      - name: Validate desktop entry
+        run: desktop-file-validate desktop/private-internet-access.desktop
+
+      - name: Version is consistent across scripts and changelog
+        run: |
+          install_version="$(grep -oP '^PROJECT_VERSION="\K[^"]+' install.sh)"
+          uninstall_version="$(grep -oP '^PROJECT_VERSION="\K[^"]+' uninstall.sh)"
+          if [ "$install_version" != "$uninstall_version" ]; then
+            echo "install.sh is $install_version but uninstall.sh is $uninstall_version"
+            exit 1
+          fi
+          if ! grep -q "## \[$install_version\]" CHANGELOG.md; then
+            echo "CHANGELOG.md has no entry for $install_version"
+            exit 1
+          fi
+          echo "version $install_version is consistent"
