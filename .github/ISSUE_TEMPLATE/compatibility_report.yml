@@ -1,0 +1,79 @@
+name: Compatibility report
+description: Tell us whether this worked on your Fedora Atomic system
+title: "[compat] "
+labels: ["compatibility"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This project is verified on Bazzite KDE. Every other Fedora Atomic
+        desktop is unverified until someone reports back, so these reports are
+        genuinely useful whether the result was good or bad.
+
+        Never include PIA credentials, account numbers, VPN tokens, or full logs
+        containing private network data.
+
+  - type: input
+    id: distro
+    attributes:
+      label: Distribution and desktop environment
+      placeholder: Bazzite KDE, Fedora Silverblue 42, Kinoite 41, Bluefin
+    validations:
+      required: true
+
+  - type: dropdown
+    id: arch
+    attributes:
+      label: CPU architecture
+      options:
+        - x86_64
+        - aarch64 / arm64
+        - other
+    validations:
+      required: true
+
+  - type: input
+    id: pia_version
+    attributes:
+      label: PIA client version
+      placeholder: "3.7.2"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: outcome
+    attributes:
+      label: Overall result
+      options:
+        - Worked completely
+        - Worked with some problems
+        - Did not work
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: works
+    attributes:
+      label: What works
+      options:
+        - label: The client opens from the application menu
+        - label: The client still works after a reboot
+        - label: WireGuard connects
+        - label: The kill switch behaves as expected
+        - label: Shadowsocks multi-hop connects
+        - label: DNS still resolves after changing network (wifi to ethernet, or a different wifi)
+
+  - type: textarea
+    id: verify
+    attributes:
+      label: Output of ./install.sh --verify
+      description: Makes no changes and needs no sudo. Paste the whole report.
+      render: text
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Anything else
+      description: Extra packages you needed, steps that behaved differently, or anything the documentation got wrong.

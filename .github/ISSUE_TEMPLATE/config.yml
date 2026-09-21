@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Private Internet Access support
+    url: https://helpdesk.privateinternetaccess.com/
+    about: Problems with the PIA client, your account, or connectivity once PIA is installed and running belong with PIA, not with this project.
+  - name: PIA desktop client issues
+    url: https://github.com/pia-foss/desktop/issues
+    about: Bugs in the PIA client itself, including the Fedora Atomic installer failure this project works around.
+  - name: Bazzite documentation
+    url: https://docs.bazzite.gg/
+    about: Questions about rpm-ostree, package layering, and Fedora Atomic in general.

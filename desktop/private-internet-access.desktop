@@ -1,10 +1,13 @@
 [Desktop Entry]
 Type=Application
 Name=Private Internet Access
+GenericName=VPN Client
 Comment=Connect to the Private Internet Access VPN
 Exec=/var/opt/piavpn/bin/pia-client
 TryExec=/var/opt/piavpn/bin/pia-client
-Icon=network-vpn
+Icon=piavpn
 Terminal=false
 Categories=Network;Security;
+Keywords=VPN;PIA;Privacy;WireGuard;
 StartupNotify=true
+StartupWMClass=pia-client
