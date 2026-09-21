@@ -1,13 +1,23 @@
+# Reference copy of the unit that install.sh writes to
+# /etc/systemd/system/pia-vpn.service
+#
+# install.sh substitutes the real PIA path it finds, which is normally
+# /var/opt/piavpn on Fedora Atomic systems. PIA's own installer ships an
+# equivalent unit but never reaches the step that installs it, because it
+# aborts earlier on the read-only /usr directory.
+
 [Unit]
 Description=Private Internet Access VPN daemon
+Documentation=https://github.com/saifullah4khan/pia-on-fedora-atomic
 After=network-online.target
 Wants=network-online.target
 
 [Service]
 Type=simple
 User=root
+Environment=LD_LIBRARY_PATH=/var/opt/piavpn/lib
 ExecStart=/var/opt/piavpn/bin/pia-daemon
-Restart=on-failure
+Restart=always
 RestartSec=3
 
 [Install]
